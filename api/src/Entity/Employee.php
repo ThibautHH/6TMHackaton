@@ -30,5 +30,6 @@ class Employee
 
     #[ORM\ManyToOne(targetEntity: Team::class)]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
     public Team $team;
 }

@@ -22,5 +22,6 @@ class Team
 
     #[ORM\ManyToOne(targetEntity: Premise::class)]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
     public Premise $premise;
 }
