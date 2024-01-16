@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -23,6 +24,7 @@ class Premise
      */
     #[ORM\Column]
     #[Assert\NotBlank]
+    #[ApiProperty(types: ["https://schema.org/name"])]
     public string $city = '';
 
     public function getId(): ?int

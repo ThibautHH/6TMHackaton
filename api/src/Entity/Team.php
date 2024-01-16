@@ -53,6 +53,7 @@ class Team
      */
     #[ORM\Column]
     #[Assert\NotBlank]
+    #[ApiProperty(types: ["https://schema.org/name"])]
     public string $name = '';
 
     /**
