@@ -12,6 +12,9 @@ final class UserPasswordHasher implements ProcessorInterface
     {
     }
 
+    /**
+     * @return T
+     */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         if (!$data->getPassword()) {
