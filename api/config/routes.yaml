@@ -6,3 +6,6 @@ controllers:
 login:
     path: /login
     methods: ['POST']
+self:
+    path: /self
+    methods: ['GET']
