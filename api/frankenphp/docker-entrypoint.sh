@@ -33,6 +33,13 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		fi
 	fi
 
+	if [ "$APP_ENV" != 'prod' ]; then
+		echo "Generating keys for JWT authentication"
+		php bin/console lexik:jwt:generate-keypair
+	fi
+	setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
+	setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
+
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
 fi
