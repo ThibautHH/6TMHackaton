@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,6 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ApiProperty(readable: false)]
     public function getId(): ?int
     {
         return $this->id;
@@ -50,6 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @see UserInterface
      */
+    #[ApiProperty(readable: false)]
     public function getUserIdentifier(): string
     {
         return (string) $this->username;
@@ -77,6 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
+    #[ApiProperty(readable: false)]
     public function getPassword(): string
     {
         return $this->password;
