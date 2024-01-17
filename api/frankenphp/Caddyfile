@@ -51,7 +51,7 @@
 	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
 	header ?Permissions-Policy "browsing-topics=()"
 
-	# Matches requests for HTML documents, for static files and for Next.js files,
+	# Matches requests for HTML documents and static files,
 	# except for known API paths and paths with extensions handled by API Platform
 	@pwa expression `(
 			header({'Accept': '*text/html*'})
@@ -60,11 +60,17 @@
 				'*.json*', '*.html', '*.csv', '*.yml', '*.yaml', '*.xml'
 			)
 		)
-		|| path('/favicon.ico', '/manifest.json', '/robots.txt', '/_next*', '/sitemap*')`
+		|| (
+			path(
+				'/favicon.ico', '/manifest.json', '/robots.txt', '/sitemap*',
+				'*.js', '*.css', '*.png', '*.jpg', '*.jpeg', '*.gif', '*.svg',
+				'*.woff2', '*.ttf', '*.eot', '*.woff',
+				'/ws'
+			)
+			&& !path('/bundles/*')
+		)`
 
-	# Comment the following line if you don't want Next.js to catch requests for HTML documents.
-	# In this case, they will be handled by the PHP app.
-	# reverse_proxy @pwa http://{$PWA_UPSTREAM}
+	reverse_proxy @pwa http://{$PWA_UPSTREAM}
 
 	php_server
 }
