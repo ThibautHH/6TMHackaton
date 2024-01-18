@@ -6,6 +6,9 @@ controllers:
 login:
     path: /login
     methods: ['POST']
+refresh:
+    path: /refresh
+    methods: ['POST']
 self:
     path: /self
     methods: ['GET']
