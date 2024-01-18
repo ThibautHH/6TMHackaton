@@ -40,6 +40,14 @@ class Employee
     #[Assert\NotBlank]
     public string $position = '';
 
+    #[ORM\Column(nullable: true, type: 'text')]
+    #[Assert\Url]
+    public ?string $professionalPicture = null;
+
+    #[ORM\Column(nullable: true, type: 'text')]
+    #[Assert\Url]
+    public ?string $casualPicture = null;
+
     #[ORM\ManyToOne(targetEntity: Team::class)]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
