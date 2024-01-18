@@ -32,9 +32,9 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 			php bin/console doctrine:migrations:migrate --no-interaction
 		fi
 
-		if [ "$( find ./src/DataFixtures -iname '*.php' -print -quit )" ]; then
-			php bin/console doctrine:fixtures:load --no-interaction
-		fi
+		if [ "$( find ./src/DataFixtures -iname '*.php' -print -quit )" ] \
+			&& php bin/console dbal:run-sql 'SELECT id FROM "user"' 2>/dev/null | grep empty >/dev/null
+		then php bin/console doctrine:fixtures:load --no-interaction; fi
 	fi
 
 	if [ "$APP_ENV" != 'prod' ]; then
