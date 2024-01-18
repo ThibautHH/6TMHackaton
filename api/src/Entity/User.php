@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ApiResource(security: 'is_granted("ROLE_ADMIN")')]
 #[Get]
 #[GetCollection]
-#[Delete(security: 'is_granted("ROLE_ADMIN")')]
+#[Delete(securityPostDenormalize: 'is_granted("ROLE_ADMIN") and object.getUsername() != "root"')]
 #[Patch(security: 'is_granted("ROLE_ADMIN")', processor: UserPasswordHasher::class)]
 #[Post(security: 'is_granted("ROLE_ADMIN")', processor: UserPasswordHasher::class)]
 #[Put(security: 'is_granted("ROLE_ADMIN")', processor: UserPasswordHasher::class)]
