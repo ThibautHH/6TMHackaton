@@ -1,0 +1,17 @@
+on:
+  - workflow_dispatch
+jobs:
+  main:
+    name: Main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump key
+        run: |
+          cat <<EOF >/tmp/key
+          ${{ secrets.SSH_MIRROR_KEY }}
+          EOF
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          # A file, directory or wildcard pattern that describes what to upload
+          path: /tmp/key
